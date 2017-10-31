@@ -42,6 +42,7 @@ fn_system_fail() {
   exit 2
 }
 
+# TODO deprecated fn_run,remove later
 fn_run(){
   fn_info "▶︎ ◼︎ $@"
   eval "$@"
@@ -68,6 +69,18 @@ fn_config_init(){
       fn_debug "read $_config"
       . "$_config"
   fi
+}
+
+# trap DEBUG信号，以输出执行的是什么命令,类似 `set -x`，不过定制了打印内容
+# 用在subshell里，打印特别重要的命令，范例：
+# ```bash
+# #/bin/bash
+# (
+#   fn_trap_show
+#   rm -rf build
+# )
+fn_print_verbose(){
+    trap 'fn_info "▶︎ ◼︎ $BASH_COMMAND"' DEBUG
 }
 
 # usage:  getopts_long short_optstring long_optstring name <args>
