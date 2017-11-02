@@ -79,7 +79,7 @@ fn_config_init(){
 #   fn_trap_show
 #   rm -rf build
 # )
-fn_verbose_on(){
+fn_set_x_on(){
     trap 'fn_info "▶︎ ◼︎ $BASH_COMMAND"' DEBUG
 }
 
